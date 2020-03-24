@@ -63,4 +63,10 @@ describe Admin::CategoriesController do
     assert_raise(ActiveRecord::RecordNotFound) { Category.find(test_id) }
   end
   
+  it "should create a new category" do
+    post :edit, :category => {:name => "Test", :keywords => "rspec", :permalink => "test", :description => "Please work"}
+    assert_response :redirect, :action => "index"
+    assigns(:categories).should_not be_nil
+  end
+  
 end
